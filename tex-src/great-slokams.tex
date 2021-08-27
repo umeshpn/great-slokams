@@ -1,0 +1,428 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage{float}
+\makeatletter
+\DeclareRobustCommand{\em}{%
+  \@nomath\em \color{gray}}
+\makeatother
+
+
+\usepackage[no-math]{fontspec}
+\usepackage{polyglossia}
+
+\usepackage{xcolor}
+
+\usepackage{dingbat}
+
+\usepackage{array}
+
+\newenvironment{rslokam}{
+  %% \color{blue}
+  \begin{verse}
+}{
+  \end{verse}
+}
+
+\usepackage{imakeidx}
+% \usepackage[columns=1]{idxlayout}
+
+
+\indexsetup{level=\subsection*,toclevel=subsection}
+
+%% Slokam Index
+\makeindex[name=slindex,title=ശ്ലോകസൂചിക,columns=1,intoc,options={-s malayalam.ist}]
+
+%% Vruththam Index
+\makeindex[name=vrindex,title=വൃത്തസൂചിക,columns=1,intoc,options={-s malayalam.ist}]
+
+%% Slokam Index
+\makeindex[name=kaindex,title=കവിസൂചിക,columns=1,intoc,options={-s malayalam.ist}]
+
+%% Slokam Index
+\makeindex[name=viindex,title=വിഷയസൂചിക,columns=1,intoc,options={-s malayalam.ist}]
+
+%% Slokam Index
+\makeindex[name=saindex,title=സമസ്യാസൂചിക,columns=1,intoc,options={-s malayalam.ist}]
+
+%% Slokam Index
+\makeindex[name=akindex,title=അക്ഷരസൂചിക,columns=1,intoc,options={-s malayalam.ist}]
+
+%% Slokam Index
+\makeindex[name=krindex,title=കൃതിസൂചിക,columns=1,intoc,options={-s malayalam.ist}]
+
+\usepackage{fdsymbol}
+\newcommand{\La}{{$\cup$}}
+\newcommand{\Gu}{{$\minus$}}
+\newcommand{\Ya}{~{\color{red}\textbf{|}}~}
+\newcommand{\Li}{~~~~{\color{red}\textbf{//}}~~~~}
+\newcommand{\Yo}{{\color{blue}\textbf{|}}}
+\newcommand{\Ivr}[1]{#1}
+
+
+\newcommand{\prash}{$\int$}
+\newcounter{slcount}
+\setcounter{slcount}{0}
+%% \newcommand{\beginning}{Start}
+
+%% Meter, Poet, First part
+\newenvironment{slokam}[3]{
+
+  \gdef\beginning{#3}
+  \gdef\thepoet{#2}
+  \refstepcounter{slcount}\label{#3}
+  \filbreak
+  \item \textbf{ശ്ലോകം~\arabic{slcount}: (#2)} 
+  \index[slindex]{#3...~(#2)}
+  \index[vrindex]{#1!#3...}
+  \index[kaindex]{#2!#3...}
+  \begin{verse}
+    \marginpar{\vspace{2.5em}\fbox{#1}}
+    \bfseries
+    \color{teal}
+    %% \mfonts
+    \small
+  }{
+  \end{verse}
+}
+
+%% 1 - 1 (2)
+%% 2 - 3 (4)
+%% 3 - 5 (6)
+\newenvironment{IndexedSlokam}[6]{
+
+  \gdef\beginning{#5}
+  \gdef\thepoet{#3}
+  \gdef\IndexedBeginning{#6}
+  \gdef\IndexedPoet{#4}
+  \refstepcounter{slcount}\label{#5}
+  \filbreak
+  \item \textbf{ശ്ലോകം~\arabic{slcount}: (#3)} 
+  \index[slindex]{#6...~(#4)@#5...~(#3)}
+  \index[vrindex]{#2@#1!#6@#5...}
+  \index[kaindex]{#4@#3!#6@#5...}
+  \begin{verse}
+    \marginpar{\vspace{2.5em}\fbox{#1}}
+    \bfseries
+    \color{teal}
+    %% \mfonts
+    \small
+  }{
+  \end{verse}
+}
+
+
+\newcommand{\sam}[1]{\uline{#1}{\index[saindex]{#1!\beginning...}\index[viindex]{സമസ്യാപൂരണം!\beginning...}}}
+\newcommand{\samd}[2]{\uline{#1}{\index[saindex]{#2!\beginning...}\index[viindex]{സമസ്യാപൂരണം!\beginning...}}}
+
+\newcommand{\Topic}[1]{#1\index[viindex]{#1!\beginning...}}
+\newcommand{\IndexedTopic}[2]{#1\index[viindex]{#2@#1!\IndexedBeginning@\beginning...}}
+\newcommand{\Book}[1]{\textbf{കൃതി:} #1\index[krindex]{#1~(\thepoet)!\beginning...}}
+\newcommand{\IndexedBook}[2]{\textbf{കൃതി:} #1\index[krindex]{#2~(\IndexedPoet)@#1~(\thepoet)!\IndexedBeginning@\beginning...}}
+
+% \newcommand{\SlokRef}[1]{{\mfontl #1\ldots}~(പേജ് \pageref{#1})}
+\newcommand{\SlRef}[1]{{\color{magenta} \mfontl #1\ldots}~(ശ്ലോകം
+  \ref{#1})}
+\newcommand{\SeeAlso}[1]{\leftpointright~\SlRef{#1}}
+\newcommand{\OSlRef}[1]{\textbf{മൂലശ്ലോകം}: {\color{magenta} \mfontl #1\ldots}~(ശ്ലോകം \ref{#1})}
+\newcommand{\PrevSlRef}[1]{{$\Leftarrow$ \color{magenta} \mfontl #1\ldots}~(ശ്ലോകം \ref{#1})}
+\newcommand{\NextSlRef}[1]{{$\Rightarrow$ \color{magenta} \mfontl #1\ldots}~(ശ്ലോകം \ref{#1})}
+
+\newcommand{\mfont}{Gayathri}
+\newcommand{\sfont}{Gayathri}
+\newcommand{\thinmfont}{Rachana}
+
+\setdefaultlanguage{malayalam}
+\setotherlanguages{english}
+\setmainfont[Script=Malayalam, HyphenChar="00AD]{\mfont}
+\newfontfamily{\malayalamfonttt}{Monaco}
+%% \newfontfamily{\mfontl}[Script=Malayalam, HyphenChar="00AD, UprightFont={* Thin}]{\thinmfont}
+\newfontfamily{\mfontl}[Script=Malayalam, HyphenChar="00AD]{\thinmfont}
+\newfontfamily{\mfonts}[Script=Malayalam, HyphenChar="00AD]{\sfont}
+\newcommand{\Comm}[1]{{\small\mfontl #1}}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+
+\setlength{\parindent}{0pt}               %% First line of paragraph is not indented
+\addtolength{\parskip}{0.5\baselineskip}  %% Increase vertical space between paragraphs
+\usepackage{verse}
+
+\input{meter-decl}
+\input{people}
+
+\newcommand{\Letter}[2]{\index[akindex]{#1 $\Rightarrow$ #2!\beginning}}
+\newcommand{\IndexedLetter}[4]{\index[akindex]{#2 $\Rightarrow$ #4@#1 $\Rightarrow$ #3!\IndexedBeginning@\beginning}}
+
+\title{ശ്ലോകങ്ങള്‍}
+\author{{\small സമ്പാദനം:} ഉമേഷ് നരേന്ദ്രന്‍}
+\date{Last updated: \today}
+
+
+  \usepackage{hyperref}
+  \hypersetup{
+    colorlinks=true,       % false: boxed links; true: colored links
+    urlcolor=blue,          % color of external links
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links
+    citecolor=cyan,        % color of links to bibliography
+    filecolor=black,      % color of file links
+  }
+
+\input{slokam-count}
+
+\begin{document}
+
+\maketitle
+
+\clearpage
+
+\section*{ആമുഖം}
+
+\begin{verse}
+    \bfseries
+    \color{teal}
+    \small
+നാകമാക്കിടുവാൻ വിശ്വം \\
+ശോകമൊക്കെ മറക്കുവാൻ \\
+ലോകർക്കാനന്ദമേകീടാൻ \\
+ശ്ലോകം ചൊല്ലാം നമുക്കെടോ!
+\end{verse}
+
+
+മലയാളത്തില്‍ ശ്ലോകസമാഹാരങ്ങള്‍ ധാരാളം പ്രസിദ്ധീകൃതമായിട്ടുണ്ട്. അവയിൽ പലതും
+അച്ചടിയിലില്ലാത്തതിനാല്‍ അക്ഷരശ്ലോകപ്രേമികൾക്ക് പല ശ്ലോകങ്ങളും ലഭ്യമല്ല.  കർത്താവിനെയും കൃതിയെയും അറിയാത്ത ധാരാളം ശ്ലോകങ്ങളും പ്രചാരത്തിലുണ്ട്.  
+
+കിട്ടാവുന്ന നല്ല ശ്ലോകങ്ങളുടെ ഒരു സമാഹാരം ഉണ്ടാക്കുക എന്ന ആഗ്രഹത്തിന്റെ സാഫല്യമാണ് ഈ
+പുസ്തകം.  ഇതിനു പുറകില്‍ താഴെപ്പറയുന്ന ലക്ഷ്യങ്ങളാണ് ഉള്ളത്.
+
+\begin{enumerate}
+\item ആധുനികസാങ്കേതികവിദ്യ ഉപയോഗിച്ച് ഏറ്റവും ഭംഗിയായി തെറ്റു തിരുത്തി ശ്ലോകങ്ങളെ
+  അവതരിപ്പിക്കുക. ടൈപ്സെറ്റിഗിംന് \LaTeX/XeTeX{}, സ്വതന്ത്ര മലയാളം കമ്പ്യൂട്ടിംഗ്
+  (SMC) ഉണ്ടാക്കിയ മലയാളം ഫോണ്ടുകള്‍ എന്നിവയാണ്  ഇതില്‍
+  ഉപയോഗിച്ചിരിക്കുന്നത്. 
+\item എല്ലാവര്‍ക്കും സൗജന്യമായി ഇന്റര്‍നെറ്റില്‍ ലഭ്യമാക്കുക.  ഈ പി. ഡി. എഫും അതിന്റെ
+  കൂടെയുള്ള വെബ് പേജും പൂര്‍ണ്ണമായും സൗജന്യമാണ്.
+\item അടിയ്ക്കടി തെറ്റു തിരുത്തി നവീകരിക്കുകയും കൂടുതല്‍ ശ്ലോകങ്ങള്‍ ചേര്‍ക്കുകയും ചെയ്യുക.
+  മാസത്തില്‍ ഒരിക്കല്‍ പുതിയ അപ്‌ഡേറ്റ് പ്രസിദ്ധീകരിക്കാനാണ് ഉദ്ദേശിക്കുന്നത്.
+\item കമ്പ്യൂട്ടറില്‍ വായിക്കുകയോ അച്ചടിച്ച് ഉപയോഗിക്കുകയോ ചെയ്യാവുന്ന രീതിയിലുള്ള
+  രൂപകല്പന.  പി. ഡി. എഫ്. ഫോര്‍മാറ്റ് അതിനു യോജിച്ചതാണ്.  കമ്പ്യൂട്ടറില്‍ വായിക്കാനായി
+  ക്ലിക്കബിള്‍ ക്രോസ്-റെഫറന്‍സുകള്‍ ഉണ്ട്.  പ്രിന്റിനു വേണ്ടി പേജ് നമ്പരുകളും. 
+\item വിശദമായ ഇന്‍ഡക്സും ക്രോസ് റെഫറന്‍സുകളും സ്റ്റാറ്റിസ്റ്റിക്സും.  ഒരു കമ്പ്യൂട്ടര്‍ പ്രോഗ്രാമിന്റെ
+  സഹായത്തോടെ തയ്യാറാക്കുന്നതിനാല്‍ ഓരോ അപ്‌ഡേറ്റിലും ഇതു കൃത്യമായി ചേര്‍ക്കാന്‍
+  കഴിയും. ``സ്റ്റാറ്റിസ്റ്റിക്സും സൂചികയും'' (പേജ് \pageref{sec:Statistics}) എന്ന
+  അദ്ധ്യായത്തില്‍ ഇവയുടെ വിശദവിവരങ്ങള്‍ ഉണ്ട്. 
+\item അക്ഷരശ്ലോകപ്രേമികള്‍ക്കുതകുന്ന മറ്റു വിവരങ്ങള്‍ ചേര്‍ക്കുക.  ഉദാഹരണമായി, ഒരു
+  ശ്ലോകത്തിനു മുമ്പും പിമ്പും ചൊല്ലാന്‍ പറ്റിയ അതേ ശൈലിയിലുള്ള മറ്റു ശ്ലോകങ്ങളെ
+  $\Leftarrow$, $\Rightarrow$ എന്ന ചിഹങ്ങള്‍ വഴി കാണിച്ചിരിക്കുന്നു.  അതു പോലെ,
+  പരിഭാഷകളുടെ മൂലശ്ലോകങ്ങളിലേക്കും, അതേ ആശയമുള്ള മറ്റു ശ്ലോകങ്ങളിലേക്കും
+  ക്രോസ്-റെഫറന്‍സുകള്‍ ഉണ്ട്. 
+\end{enumerate}
+
+മലയാളം, സംസ്കൃതം എന്നു രണ്ടു വിഭാഗങ്ങളായി തിരിച്ചിരിക്കുന്നു.   അക്ഷരശ്ലോകത്തിനു ചൊല്ലാറില്ലാത്ത
+അനുഷ്ടുപ്പു പോലെയുള്ള വൃത്തങ്ങളിലുള്ള ശ്ലോകങ്ങളെയും, കാവ്യങ്ങളിലെയും മറ്റും
+മുക്തകസ്വഭാവമില്ലാത്ത ശ്ലോകങ്ങളെയും നാല്‍ക്കാലികളെയും കഴിയുന്നത്ര ഒഴിവാക്കിയിട്ടുണ്ട്. 
+
+ഈ പുസ്തകം
+\url{https://bit.ly/slokam-pdf}
+എന്ന ലിങ്കില്‍ നിന്നു ഡൗണ്‍ലോഡ് ചെയ്യാന്‍ സാധിക്കും.  സേര്‍ച്ചു ചെയ്യാന്‍ സഹായകമായി ഇതിലെ എല്ലാ ശ്ലോകങ്ങളും ഒരു
+പേജിലായി
+\url{https://bit.ly/slokam-web}
+എന്ന ലിങ്കില്‍ ലഭ്യമാണ്.
+
+ഈ പുസ്തകത്തിലെ പിശകുകള്‍, ഇതു നന്നാക്കാനുള്ള നിര്‍ദ്ദേശങ്ങള്‍, ഇതില്‍ ചേര്‍ക്കാനുള്ള ശ്ലോകങ്ങള്‍
+ഇവ \texttt{umesh.p.narendran@gmail.com} എന്ന വിലാസത്തില്‍ അയയ്ക്കുക.  ഇതിലെ
+ഏതെങ്കിലും ശ്ലോകങ്ങള്‍ക്ക് കോപ്പിറൈറ്റ് ഉള്ളവര്‍ അവ ഒഴിവാക്കാന്‍ ആവശ്യപ്പെട്ടാല്‍ അവ
+ഒഴിവാക്കുന്നതാണ്. 
+
+അക്ഷരശ്ലോകപ്രേമികള്‍ക്ക് ഈ പുസ്തകം വളരെ ഉപകാരപ്രദമായിരിക്കും എന്നു പ്രതീക്ഷിക്കുന്നു.
+
+\begin{flushright}
+\textbf{ഉമേഷ് നരേന്ദ്രന്‍}\\
+2021 ഏപ്രില്‍. 
+\end{flushright}
+
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
+\section{ക്രമീകരണം}
+ശ്ലോകങ്ങൾ: മലയാളം/മണിപ്രവാളം (പേജ്~\pageref{sec:slokams:mal}), ശ്ലോകങ്ങൾ: സംസ്കൃതം (പേജ്~\pageref{sec:slokams:san}) എന്ന
+അദ്ധ്യായങ്ങളിലായി അകാരാദിക്രമത്തിൽ \NTotalSlokams{} ഇതിൽ
+ക്രോഡീകരിച്ചിരിക്കുന്നു. ഓരോ ശ്ലോകത്തിന്റീയും കൂടെ അതിന്റെ വൃത്തം, കവി (ലഭ്യമെങ്കിൽ),
+കൃതി (ലഭ്യമെങ്കിൽ) എന്നിവ സൂചിപ്പിച്ചിരിക്കുന്നു.
+
+പേജ് \pageref{sec:index} തൊട്ട് ശ്ലോകങ്ങൾ, കവികൾ (ഓരോ കവിയുടെയും ശ്ലോകങ്ങളും) വൃത്തങ്ങൾ (ഓരോ വൃത്തത്തിലെയും
+ശ്ലോകങ്ങളും), കൃതികൾ (ലഭ്യമായവ), വിഷയം, സമസ്യാപൂരണങ്ങളായ ശ്ലോകങ്ങളുടെ സമസ്യകൾ,
+ഒന്നാം വരിയിലെയും മൂന്നാം വരിയിലെയും അക്ഷരങ്ങൾ എന്നിവയുടെ സൂചികകൾ ചേർത്തിരിക്കുന്നു.
+ഓരോന്നിന്റെയും താഴെ അതാതിന്റെ ശ്ലോകങ്ങളും അവയിലേക്കുള്ള പേജ് നമ്പരും ലിങ്കും
+കൊടുത്തിട്ടുണ്ട്. 
+
+സൂചികയ്ക്ക് മലയാളത്തിൽ സാധാരണയായ അകാരാദിക്രമം ദീക്ഷിച്ചിരിക്കുന്നു.  താഴെപ്പറയുന്നവ
+ശ്രദ്ധിക്കുക.
+
+\begin{enumerate}
+\item വർഗ്ഗാക്ഷരങ്ങൾക്കു മുമ്പുള്ള അനുസ്വാരം ആ വർഗ്ഗത്തിലെ അനുനാസികമായി കണക്കാക്കുന്നു.  ഉദാ:
+ഗംഗ (ഗങ്ഗ) എന്നത് ഗഗനം, ഗജം എന്നിവയ്ക്ക് ഇടയിൽ വരുന്നു. 
+
+\item ബാക്കിയുള്ള അനുസ്വാരങ്ങളെ മ് ആയി കണക്കാക്കുന്നു.  ഉദാ: സംരംഭം എന്നത് സമ്യക്, സമ്രാട്ട്
+എന്നിവയ്ക്കു വരുന്നു.
+
+\item വിസർഗ്ഗം ഹ് എന്നതിനു ശേഷം വരുന്നു. 
+
+\item റ്റ-യെ റ-യുടെ കൂട്ടക്ഷരമായി കണക്കാക്കിയിരിക്കുന്നു. 
+\end{enumerate}
+
+ചില ശ്ലോകങ്ങളുടെ കൂടെ താഴെപ്പറയുന്ന ചിഹ്നങ്ങൾ ചേർത്തിരിക്കുന്നു.
+
+\begin{enumerate}
+\item [\leftpointright]: ഇതിനോടു സാദൃശ്യമുള്ള മറ്റൊരു ശ്ലോകം. 
+\item [$\Leftarrow$]: അക്ഷരശ്ലോകത്തിൽ ഇതിനു മുമ്പു വരാവുന്ന ഇതേ രീതിയിലുള്ള
+  ശ്ലോകം. 
+\item [$\Rightarrow$]: അക്ഷരശ്ലോകത്തിൽ ഇതിനു ശേഷം വരാവുന്ന ഇതേ രീതിയിലുള്ള
+  ശ്ലോകം. 
+\end{enumerate}
+
+കൂടാതെ, പ്രസിദ്ധസമസ്യകളെ \uline{അടിവരയിട്ടു} സൂചിപ്പിച്ചിരിക്കുന്നു.
+
+\clearpage
+\input{great-slokams-mal-tex}
+
+\clearpage
+\input{great-slokams-san-tex}
+
+\clearpage
+
+\section{വൃത്തങ്ങൾ}
+{
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|rc|c|c|}
+\hline
+\textbf{വൃത്തം} & \multicolumn{2}{c|}{\textbf{അക്ഷരം}} & \multicolumn{2}{c|}{\textbf{ലക്ഷണം}}  \\
+\hline
+\Ivr{ശംഭുനടനം} & 26 & & \La\Gu\La\La\La\Gu\La\La\La\Gu\La\La\La\Gu\La\La\La\Gu\La\La\La\Gu\La\La\La\Gu & ജസനഭജസനഭ ലഗു\\
+
+\Ivr{മത്തേഭം} & 22 &  & \Gu\Gu\La\Gu\La\La\La\Yo\Gu\Gu\La\Gu\La\La\La\Yo\Gu\Gu\La\Gu\La\La\La\Gu & തഭയജസരന ഗു \\
+
+\Ivr{കുസുമമഞ്ജരി} & 21 & & \Gu\La\Gu\La\La\La\Yo\Gu\La\Gu\La\La\La\Yo\Gu\La\Gu\La\La\La\Yo\Gu\La\Gu & രനരനരനര \\
+
+\Ivr{സ്രഗ്ദ്ധര} & 21 & (7/7/7) & \Gu\Gu\Gu\Gu\La\Gu\La\Ya\La\La\La\La\La\La\Gu\Ya\Gu\La\Gu\Gu\La\Gu\Gu  & മരഭനയയയ \\
+
+\Ivr{ശാർദ്ദൂലവിക്രീഡിതം} & 19 & (12/7) & \Gu\Gu\Gu\La\La\Gu\La\Gu\La\La\La\Gu\Ya\Gu\Gu\La\Gu\Gu\La\Gu  & മസജസതത ഗു\\
+
+\Ivr{പൃത്ഥ്വി} & 17 & (8/9) & \La\Gu\La\La\La\Gu\La\Gu\Ya\La\La\La\Gu\La\Gu\Gu\La\Gu &  ജസജസയ ലഗു\\
+
+\Ivr{മന്ദാക്രാന്ത} & 17 & (4/6/7) & \Gu\Gu\Gu\Gu\Ya\La\La\La\La\La\Gu\Ya\Gu\La\Gu\Gu\La\Gu\Gu  & മഭനതത ഗുഗു\\
+
+\Ivr{ശിഖരിണി} & 17 & (6/11) & \La\Gu\Gu\Gu\Gu\Gu\Ya\La\La\La\La\La\Gu\Yo\Gu\La\La\Gu  & യമനസഭ ലഗു\\
+
+\Ivr{ഹരിണി} & 17 & (6/4/7) & \La\La\La\La\La\Gu\Ya\Gu\Gu\Gu\Gu\Ya\La\Gu\La\La\Gu\La\Gu & നസമരസ ലഗു \\
+
+\Ivr{പഞ്ചചാമരം} & 16 & & \La\Gu\La\Gu\La\Gu\La\Gu\La\Gu\La\Gu\La\Gu\La\Gu  & ജരജരജ ഗ\\
+
+\Ivr{മാലിനി} & 15 & (8/7) & \La\La\La\La\La\La\Gu\Gu\Ya\Gu\La\Gu\Gu\La\Gu\Gu  & നനമയയ\\
+
+\Ivr{വസന്തതിലകം} & 14 & & \Gu\Gu\La\Gu\La\La\La\Gu\La\La\Gu\La\Gu\Gu  & തഭജജ ഗുഗു\\
+
+%% \Ivr{ഇന്ദുവദന} & 14 & \Gu\La\La\La\Gu\La\La\La\Gu\La\La\Gu\Gu  \\
+
+%% \Ivr{പ്രഹർഷിണി} & 13 & \Gu\Gu\Gu\Ya\La\La\La\La\Gu\La\Gu\La\Gu\Gu  \\
+
+\Ivr{മഞ്ജുഭാഷിണി} & 13 & & \La\La\Gu\La\Gu\La\La\La\Gu\La\Gu\La\Gu\Gu  & സജസജ ഗു\\
+
+%% \Ivr{വംശസ്ഥം} & 12 & \La\Gu\La\Gu\Gu\La\La\Gu\La\Gu\La\Gu  \\
+
+
+\Ivr{തോടകം} & 12 & & \La\La\Gu\La\La\Gu\La\La\Gu\La\La\Gu & സസസസ\\
+
+\Ivr{ദ്രുതവിളംബിതം} & 12 & & \La\La\La\Gu\La\La\Gu\La\La\Gu\La\Gu  & നഭഭര\\
+
+\Ivr{ഭുജംഗപ്രയാതം} & 12 & & \La\Gu\Gu\La\Gu\Gu\La\Gu\Gu\La\Gu\Gu  & യയയയ\\
+
+\Ivr{ഇന്ദ്രവജ്ര} & 11 & & \Gu\Gu\La\Gu\Gu\La\La\Gu\La\Gu\Gu  & തതജ ഗുഗു\\
+
+\Ivr{ഉപേന്ദ്രവജ്ര} & 11 & & \La\Gu\La\Gu\Gu\La\La\Gu\La\Gu\Gu  & ജതജ ഗുഗു\\
+
+\Ivr{രഥോദ്ധത} & 11 & & \Gu\La\Gu\La\La\La\Gu\La\Gu\La\Gu  & രനര ലഗു\\
+
+%% \Ivr{സമ്മത} & 11 & \La\La\La\Gu\La\Gu\Yo\Gu\La\Gu\La\Gu  \\
+
+%% \Ivr{ചമ്പകമാല} & 10 & \Gu\La\La\Gu\Gu\Gu\La\La\Gu\Gu  \\
+
+%% \hline
+
+%% \Ivr{പുഷ്പിതാഗ്ര} & 12/13 & \La\La\La\La\La\La\Gu\La\Gu\La\Gu\Gu \Li \La\La\La\La\Gu\La\La\Gu\La\Gu\La\Gu\Gu  \\
+
+%% \Ivr{വസന്തമാലിക} & 11/12 & \La\La\Gu\La\La\Gu\La\Gu\La\Gu\Gu \Li \La\La\Gu\Gu\La\La\Gu\La\Gu\La\Gu\Gu  \\
+
+%% \Ivr{വിയോഗിനി} & 10/11 & \La\La\Gu\La\La\Gu\La\Gu\La\Gu \Li \La\La\Gu\Gu\La\La\Gu\La\Gu\La\Gu  \\
+
+
+\hline
+\end{tabular}
+}
+
+
+\clearpage
+\section{സ്റ്റാറ്റിസ്റ്റിക്സ്}
+\label{sec:Statistics}
+
+%  ഈ പുസ്തകത്തിലെ
+% ശ്ലോകങ്ങളുടെ പൊതുസ്വഭാവം മനസ്സിലാക്കാന്‍ ഉതകുന്ന സ്റ്റാറ്റിസ്റ്റിക്സ് ആണ് ഈ അദ്ധ്യായത്തില്‍.
+% വിശദമായ സൂചിക പേജ് \pageref{sec:index} മുതല്‍ തുടങ്ങുന്നു.  
+
+% പട്ടിക 1-ല്‍ ഇതിലെ ശ്ലോകങ്ങളുടെ വൃത്തങ്ങള്‍ അവയുടെ എണ്ണത്തിന്റെ ക്രമത്തില്‍
+% ചേര്‍ത്തിരിക്കുന്നു. 70 ശതമാനത്തില്‍ അധികം ശ്ലോകങ്ങളും ശാര്‍ദ്ദൂലവിക്രീഡിതം, സ്രഗ്ദ്ധര എന്നീ
+% വൃത്തങ്ങളിലാണ് എന്നു കാണാം.  ഓരോ വൃത്തവും അതിലെ ശ്ലോകങ്ങളും അകാരാദിക്രമത്തില്‍ കാണാന്‍
+% സൂചികയിലെ ``(B) വൃത്തങ്ങള്‍'' എന്ന ഭാഗം നോക്കുക. 
+
+% പട്ടിക 2, 3, 4 എന്നിവയില്‍ ഇതിലെ ശ്ലോകങ്ങളുടെ രചയിതാക്കളെ അവരുടെ ശ്ലോകങ്ങളുടെ
+% എണ്ണത്തിന്റെ ക്രമത്തില്‍ കൊടുത്തിരിക്കുന്നു.  ഓരോ കവിയെയും ശ്ലോകങ്ങളും 
+% അകാരാദിക്രമത്തില്‍ കാണാന്‍ സൂചികയിലെ ``(C) കവികള്‍'' എന്ന ഭാഗം നോക്കുക. 
+
+% പട്ടിക 5-ല്‍ ഒന്നാം വരിയിലും മൂന്നാം വരിയിലും വരുന്ന ആദ്യാക്ഷരങ്ങള്‍ അവയുടെ എണ്ണത്തിന്റെ
+% ക്രമത്തില്‍ കൊടുത്തിരിക്കുന്നു.  ഏതൊക്കെ അക്ഷരങ്ങളാണു കൂടുതല്‍ പഠിക്കേണ്ടത് എന്നതു
+% തീരുമാനിക്കാന്‍ ഇതു സഹായിക്കും. 
+
+% 6 മുതല്‍ 11 വരെയുള്ള പട്ടികകളില്‍ ഒന്നാം വരിയിലെയും മൂന്നാം വരിയിലെയും അക്ഷരങ്ങളുടെ
+% യോഗം അവയുടെ എണ്ണത്തിന്റെ ക്രമത്തില്‍ കൊടുത്തിരിക്കുന്നു.  ഇതിലെ ഓരോന്നിലുമുള്ള ശ്ലോകങ്ങള്‍
+% അകാരാദിക്രമത്തില്‍ കാണാന്‍ സൂചികയിലെ ``(G) അക്ഷരത്തുടര്‍ച്ച'' എന്ന ഭാഗം നോക്കുക. 
+
+% ഇവയെക്കൂടാതെ, സൂചികയില്‍ എല്ലാ ശ്ലോകങ്ങളും അകാരാദിക്രമത്തില്‍ (``(A) ശ്ലോകങ്ങള്‍'' എന്ന
+% ഭാഗം), കൃതികളും അവയിലെ ശ്ലോകങ്ങളും അകാരാദിക്രമത്തില്‍ (``(D) കൃതികള്‍'' എന്ന ഭാഗം),
+% വിഷയങ്ങളും അവ അടങ്ങിയ ശ്ലോകങ്ങളും (``(E) വിഷയങ്ങള്‍'' എന്ന ഭാഗം), സമസ്യകള്‍
+% (``(F) സമസ്യാപൂരണങ്ങള്‍'' എന്ന ഭാഗം)  എന്നിവയും സൂചികയില്‍ ഉണ്ട്. 
+\newcommand{\aksharam}{അക്ഷരം}
+\newcommand{\kramam}{ക്രമം}
+\newcommand{\ennam}{എണ്ണം}
+\newcommand{\FirstLine}{ഒന്നാം വരി}
+\newcommand{\ThirdLine}{മൂന്നാം വരി}
+\newcommand{\Letters}{അക്ഷരങ്ങള്‍}
+\newcommand{\aksharakramam}{അക്ഷരക്രമം}
+\newcommand{\vruththam}{വൃത്തം}
+\newcommand{\vruththams}{വൃത്തങ്ങള്‍}
+\newcommand{\kavi}{കവി}
+\newcommand{\kavis}{കവികള്‍}
+\newcommand{\TotalSlokams}{മൊത്തം ശ്ലോകങ്ങള്‍}
+\newcommand{\MalSlokams}{(മലയാളം)}
+\newcommand{\SanSlokams}{(സംസ്കൃതം)}
+\newcommand{\TotalCount}{മൊത്തം}
+
+\input{stats}
+
+
+\clearpage
+\label{sec:index}
+\section{സൂചികകൾ}
+\printindex[slindex]
+\printindex[kaindex]
+\printindex[vrindex]
+\printindex[krindex]
+\printindex[viindex]
+\printindex[saindex]
+\printindex[akindex]
+
+
+
+\end{document}

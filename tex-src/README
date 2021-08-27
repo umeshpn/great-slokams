@@ -1,0 +1,148 @@
+This gives the instructions of how to update great-slokams.pdf and great-slokams.html.
+
+Disclaimer: This was built on a Macbook Pro machine running macOS
+version 11.4 (Big Sur) using MacTeX-2021 Distribution for LaTeX/XeTeX.
+It may not work as it is in other platforms and may need minor modifications.
+
+You need:
+
+1) A working LaTeX/XeTeX system.
+
+2) A python3 compiler.
+
+3) The fonts Gayathri, Manjari and Rachana (available at
+   https://smc.org.in/fonts/).  You may use other Malayalam fonts as
+   well, if you make corresponding changes in the file
+   great-slokams.tex.
+
+The files you obtain from Github that do not need much change are the
+following:
+
+1) scripts/SlokamGenerator.py and scripts/indexkeygenerator.py: The Python programs
+   used to generate necessary intermediate .tex files.  You don't need
+   to make any changes to these scripts.
+
+2) tex-src/great-slokams.tex: The main .tex file.  You don't need to change
+   anything in this file, unless you want to add/change sections or
+   change various configuration paramaters.
+
+3) tex-src/meter-decl.tex: List of names of vruththams.  You don't need to
+   change anything here, unless you want to add a new vruththam.  If
+   you need to add a new vruththam, follow the conventions in the file
+   and add the definition.
+
+4) tex-src/people.tex: This is a list of people quoted in the document.  When
+   you introduce a new author or other people, it is recommended to
+   add it here, and use the macro name in the document.  This is for
+   consistency in spelling and to have unique index entries.
+
+5) tex-src/malayalam.ist: Definition for the index format.
+
+The files you get from Github, which you need to modify to add more
+slokams in Malayalam unicode are:
+
+1) great-slokams-san.tex: Add Sanskrit slokams in the alphabetic order
+   here.
+
+2) great-slokams-mal.tex: Add Malayalam or Manipravaalam slokams in
+   the alphabetic order here.
+
+To add a slokam, identify its position in the alphabetical order, and insert it like:
+
+\begin{slokam}{<1>}{<2>}{<3>}
+<Slokam line 1> \\
+<Slokam line 2> \\
+<Slokam line 3> \\
+<Slokam line 4>
+\end{slokam}
+
+\Letter{<5>}{<6>}
+
+
+Here,
+
+<1>: The vruththam of the slokam.  Use the macro name in
+     meter-decl.tex.  If it is a new vruththam, add it in
+     meter-decl.tex, and use the macro here.
+
+<2>: The name of the poet.  The poets name can be directly given here,
+     but it is recommended to use the macro from people.tex, adding an
+     entry there to refer a new poet.
+
+<3>: The first part of the slokam.  This will appear in the indexes.
+     It is also used as the label to refer it from other places.
+
+
+Slokam line <1-4>: The four lines of the slokam, the first three
+    terminated with \\.  If you want to break lines in the middle of a
+    line, add a \\ there.
+
+\Letter{<5>}{<6>}: Enter the starting letter as <5> and the next
+letter (The first letter of the third line) as <6>.  This is required,
+and will not be printed in the document. This information is used to
+prepare statistics and index.
+
+Optionally, the following also may be added after the slokam:
+
+\Book{<7>}: The name of the book.  It will be printed in the text and
+will be included in the indexes.
+
+\Topic{<8>}: The theme of the slokam.  You can add multiple topics for
+    the same slokam. It wil be printed in the text and will appear in
+    the indexes.
+
+Any arbitrary text as commentary.  There, you may refer other slokams
+using the label <3> of that slokam.  The following ways of referring
+are there.
+
+
+\OSlRef{<9>}:  Reference to any arbitrary slokam.
+
+\PrevSlokaRef{<10>}: A suggestion of reciting this slokam after <10> in
+    aksharaslokam.  They may be of similar structure.
+
+\NextSlokaRef{<11>}: A suggestion of reciting <11>  after this slokam in
+    aksharaslokam.  They may be of similar structure.
+
+\OSlRef{<12>}:  If this slokam is a translation, <12> gives it original slokam.
+
+If the slokam you are adding is for a new letter not already in the
+document, add the following lines just before the slokam.
+
+\end{enumerate}
+\subsection{<13>}
+\befin{enumerate}
+
+where <13> is the new letter.
+
+The new files can be generated as follows:
+
+1) Change directory to the "tex-src" directory.
+
+2)  Run '../Slokgenerator.py'.  This will generate the following files.
+
+    a) great-slokams-mal-tex.tex
+    b) great-slokams-san-tex.tex
+    c) stats.tex
+    d) slokam-count.tex
+    d) great-slokams.html
+
+  Do not check in these files to the repository.  They will be generated every time.
+
+2) Compile the XeTeX files by
+
+  a) xelatex great-slokams
+
+     Repeat it till there are no more warnings with the following text:
+
+     "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right."
+
+
+  This will create a number of files (*.aux, *.out, *.toc, *.log,
+  *.idx, *.ind, *.ilg, *.pdf).  Do not check in any of them.
+
+
+Take the following files as output:
+
+1) great-slokams.pdf:  Slokams in PDF format.
+2) great-slokams.html: Slokams in Unicode HTML format.
