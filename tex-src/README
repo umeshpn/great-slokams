@@ -119,7 +119,7 @@ The new files can be generated as follows:
 
 1) Change directory to the "tex-src" directory.
 
-2)  Run '../Slokgenerator.py'.  This will generate the following files.
+2)  Run '../scripts/SlokamGenerator.py'.  This will generate the following files.
 
     a) great-slokams-mal-tex.tex
     b) great-slokams-san-tex.tex
