@@ -269,11 +269,15 @@ class SlokamGenerator:
                 line = self.in_file.readline()
                 continue
 
+            # All other lines
             self.out_latex.write('%s\n' % line)
             if in_slokam:
                 line = re.sub(r'\\sam\{(.+)\}', r'\1', line)
                 line = re.sub(r'\\samd\{(.+)\}\{.+\}', r'\1', line)
                 self.out_html.write('    %s<br>\n' % line)
+            else:
+                if not re.match(r'^\s*$', line):
+                    print('Other line: %s' % line)
 
 
             # Read next line.

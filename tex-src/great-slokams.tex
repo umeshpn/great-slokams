@@ -133,7 +133,12 @@
 
 \setdefaultlanguage{malayalam}
 \setotherlanguages{english}
-\setmainfont[Script=Malayalam, HyphenChar="00AD]{\mfont}
+\setmainfont[Script=Malayalam, HyphenChar="00AD]{\mfont}[
+Path=fonts/,
+UprightFont=Gayathri-Regular.ttf,
+BoldFont=Gayathri-Bold.ttf
+]
+
 \newfontfamily{\malayalamfonttt}{Monaco}
 %% \newfontfamily{\mfontl}[Script=Malayalam, HyphenChar="00AD, UprightFont={* Thin}]{\thinmfont}
 \newfontfamily{\mfontl}[Script=Malayalam, HyphenChar="00AD]{\thinmfont}
